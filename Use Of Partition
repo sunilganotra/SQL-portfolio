@@ -1,0 +1,26 @@
+CREATE TABLE employee (
+	id 		INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	name 	VARCHAR(100),
+	dept 	VARCHAR(100),
+	salary 	INT
+);
+
+INSERT INTO employee (name, dept, salary) VALUES
+('Alexander', 'Admin', 6500),
+('Leo', 'Finance', 7000),
+('Robin', 'IT', 2000),
+('Ali', 'IT', 4000),
+('Maria', 'IT', 6000),
+('Alice', 'Admin', 5000),
+('Sebastian', 'HR', 3000),
+('Emma', 'Finance', 4000),
+('John', 'HR', 4500),
+('Kabir', 'IT', 8000);
+
+
+SELECT *, 
+       MAX(salary) OVER(PARTITION BY dept
+                        ORDER BY salary DESC) as highest_salary,
+       MIN(salary) OVER(PARTITION BY dept
+                        ORDER BY salary) as lowest_salary
+FROM   employee
