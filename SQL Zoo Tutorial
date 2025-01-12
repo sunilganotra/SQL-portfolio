@@ -1,0 +1,41 @@
+#SQLZOO Tutorial 
+
+#Q1 population and GDP of Europe.
+SELECT SUM(population), SUM(gdp)
+  FROM bbc
+ WHERE region = 'Europe'
+
+#Q2 What are the regions?
+SELECT DISTINCT region
+  FROM bbc
+
+#Q3 Show the `name` and `population` for each country with a population of more than 100000000. Show countries in descending order of population.
+SELECT name, population
+  FROM bbc
+ WHERE population > 100000000
+ ORDER BY population DESC
+
+---- Group by, Having Clauses
+
+#Q1 For each continent show the number of countries:
+SELECT continent, COUNT(name)
+  FROM world
+ GROUP BY continent
+
+#Q2. For each continent show the total population:
+SELECT continent, SUM(population)
+  FROM world
+ GROUP BY continent
+
+#Q3. For continent show the number of countries that has a population of at least 200000000.
+SELECT continent, COUNT(name)
+  FROM world
+ WHERE population >= 200000000
+ GROUP BY continent
+
+#Q4.Show the total population of those continents with a total population of at least half a billion.
+SELECT continent, SUM(population)
+  FROM world
+ GROUP BY continent
+HAVING SUM(population) >= 500000000
+ 
